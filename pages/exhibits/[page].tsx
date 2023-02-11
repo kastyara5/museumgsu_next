@@ -1,13 +1,19 @@
+import ItemsPage from "@/components/ItemsContent";
 import PageMetaModel from "@/models/PageMetaModel";
 import PageWithPaginationModel from "@/models/PageWithPaginationModel";
+import siteData from "@/static/json/exhibits.json";
+import PageNotFound from "@/pages/404";
+import { getPagesCount, getPossibleRoutes } from "@/utils/pagination";
+import { COUNT_EXHIBITS_PER_PAGE } from "@/consts/pagination";
+import { filterByShowParameter, getItemsByPage } from "@/utils/exhibitItems";
+import ExhibitItemModel from "@/models/ExhibitItemModel";
 
 export default function ExhibitsPage({
   pageMeta,
 }: {
   pageMeta: PageMetaModel;
 }) {
-  return "TEST!!1!";
-  // return <ItemsPage meta={pageMeta} />;
+  return pageMeta.exhibitItems.length ? <ItemsPage meta={pageMeta} /> : <PageNotFound />;
 }
 
 export async function getStaticProps({
@@ -15,6 +21,10 @@ export async function getStaticProps({
 }: {
   params: PageWithPaginationModel;
 }) {
+  const exhibitsToBeShown = filterByShowParameter(siteData.items as ExhibitItemModel[]).map((exhibit) => ({
+    ...exhibit,
+    linkTo: `/items/${exhibit.id}`,
+  }));
 
   return {
     props: {
@@ -22,9 +32,17 @@ export async function getStaticProps({
         title: "Экспонаты",
         paginationMeta: {
           currentPage: +params.page,
-          totalPages: 10,
+          totalPages: getPagesCount(
+            exhibitsToBeShown.length,
+            COUNT_EXHIBITS_PER_PAGE
+          ),
         },
-        exhibitItems: [],
+        exhibitItems: getItemsByPage(
+          exhibitsToBeShown,
+          +params.page,
+          COUNT_EXHIBITS_PER_PAGE
+        ),
+        routePrefix: '/exhibits'
       },
     },
   };
@@ -32,7 +50,11 @@ export async function getStaticProps({
 
 export async function getStaticPaths() {
   return {
-    paths: ["/exhibits/1"],
+    paths: getPossibleRoutes(
+      ["exhibits"],
+      siteData.items.length,
+      COUNT_EXHIBITS_PER_PAGE
+    ),
     fallback: false,
   };
 }

@@ -1,0 +1,29 @@
+.a {
+    text-decoration: none;
+}
+
+.searchItem {
+    transition: all 0.3s;
+
+    &:hover {
+        transform: scale(1.02);
+
+        img {
+            -webkit-filter: blur(0) !important; /* Safari 6.0 - 9.0 */
+            filter: blur(0) !important;
+        }
+    }
+
+    img {
+        height: auto;
+        width: 100%;
+        -webkit-filter: blur(0.2px) grayscale(5%); /* Safari 6.0 - 9.0 */
+        filter: blur(0.2px) grayscale(5%);
+        transition: all 0.3s;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .subtitle {
+        color: gray;
+    }
+}
