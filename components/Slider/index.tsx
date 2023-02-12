@@ -7,6 +7,7 @@ const Slider: FC<SliderModel> = ({ id, images }) => (
     <ol className="carousel-indicators">
       {images.map((_, index) => (
         <li
+          key={`${id}_${index}_li`}
           data-target={`#${id}`}
           data-slide-to={index}
           className={`${index === 0 && "active"}`}
@@ -15,7 +16,10 @@ const Slider: FC<SliderModel> = ({ id, images }) => (
     </ol>
     <div className="carousel-inner">
       {images.map((image, index) => (
-        <div className={`carousel-item ${index === 0 && "active"}`}>
+        <div
+          key={`${id}_${index}_image`}
+          className={`carousel-item ${index === 0 && "active"}`}
+        >
           <img width="100%" height="auto" alt={image} src={image} />
         </div>
       ))}

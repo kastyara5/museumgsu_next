@@ -6,11 +6,12 @@ import { defaultImage } from "@/consts/config";
 
 
 import styles from "./ExhibitSearchItem.module.scss";
+import Link from "next/link";
 
 const LinkWrapper = ({ link, children }: any) => (
-  <a className={styles.a} target="_blank" rel="noopener noreferrer" href={link}>
+  <Link className={styles.a} rel="noopener noreferrer" href={link}>
     {children}
-  </a>
+  </Link>
 );
 
 LinkWrapper.propTypes = {

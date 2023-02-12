@@ -48,7 +48,9 @@ const ItemContent: FC<any> = ({ meta }) => {
                   )}
                 >
                   {paragraph instanceof Array &&
-                    paragraph.map((subParagraph) => <p>{subParagraph}</p>)}
+                    paragraph.map((subParagraph, index) => (
+                      <p key={`${index}_${subParagraph}`}>{subParagraph}</p>
+                    ))}
                   {!(paragraph instanceof Array) && <p>{paragraph}</p>}
                 </div>
               </>
@@ -63,7 +65,9 @@ const ItemContent: FC<any> = ({ meta }) => {
                   )}
                 >
                   {paragraph instanceof Array &&
-                    paragraph.map((subParagraph) => <p>{subParagraph}</p>)}
+                    paragraph.map((subParagraph, index) => (
+                      <p key={`${index}_${subParagraph}`}>{subParagraph}</p>
+                    ))}
                   {!(paragraph instanceof Array) && <p>{paragraph}</p>}
                 </div>
                 <div
@@ -87,8 +91,8 @@ const ItemContent: FC<any> = ({ meta }) => {
             )}
             {!image && paragraph && paragraph instanceof Array && (
               <div className={classNames("col-md-12", styles.paddedDiv)}>
-                {paragraph.map((subParagraph) => (
-                  <p>{subParagraph}</p>
+                {paragraph.map((subParagraph, index) => (
+                  <p key={`${index}_${subParagraph}`}>{subParagraph}</p>
                 ))}
               </div>
             )}

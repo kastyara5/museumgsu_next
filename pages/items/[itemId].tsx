@@ -6,13 +6,23 @@ import {
 import ExhibitItemModel from "@/models/ExhibitItemModel";
 import ItemPageModel from "@/models/ItemPageModel";
 import ItemContent from "@/components/ItemContent";
+import Head from "next/head";
 
 export default function ExhibitsPage({
   itemMeta,
 }: {
   itemMeta: ExhibitItemModel | null;
 }) {
-  return itemMeta ? <ItemContent meta={itemMeta} /> : <PageNotFound />;
+  return itemMeta ? (
+    <>
+      <Head>
+        <title>{itemMeta.name}</title>
+      </Head>
+      <ItemContent meta={itemMeta} />
+    </>
+  ) : (
+    <PageNotFound />
+  );
 }
 
 export async function getServerSideProps({

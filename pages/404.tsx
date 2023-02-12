@@ -1,9 +1,14 @@
 import React from "react";
 import Image from "next/image";
+import Head from "next/head";
 
 import logo from "@/static/img/logo.png";
 
 const PageNotFound = () => (
+  <>
+  <Head>
+    <title>Страница не найдена</title>
+  </Head>
   <div className="row">
     <div className="col-lg-2 col-md-2">
       <div className="padded-div">
@@ -16,6 +21,7 @@ const PageNotFound = () => (
       </div>
     </div>
   </div>
+  </>
 );
 
 export default PageNotFound;
