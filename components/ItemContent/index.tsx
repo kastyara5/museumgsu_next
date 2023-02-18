@@ -6,6 +6,7 @@ import Slider from "@/components/Slider";
 import { getExhibitItemById } from "@/utils/exhibitItems";
 
 import styles from "./ItemContent.module.scss";
+import { Col, Row } from "react-bootstrap";
 
 const ItemContent: FC<any> = ({ meta }) => {
   const { id, name, images = [], paragraphs = [] } = meta;
@@ -18,18 +19,12 @@ const ItemContent: FC<any> = ({ meta }) => {
     }
 
     return (
-      <div className="row">
+      <Row className="pl-3 pr-3">
         {result.map(([image, paragraph], index) => (
           <>
             {paragraph && image && index % 2 === 0 && (
               <>
-                <div
-                  className={classNames(
-                    "col-lg-6",
-                    "col-md-12",
-                    styles.paddedDiv
-                  )}
-                >
+                <div className={classNames("col-lg-6", "col-md-12")}>
                   {image instanceof Object && !(image instanceof Array) && (
                     <ExhibitSearchItem item={getExhibitItemById(image.id)} />
                   )}
@@ -40,13 +35,7 @@ const ItemContent: FC<any> = ({ meta }) => {
                     <img alt={image} src={image} className="img-fluid" />
                   )}
                 </div>
-                <div
-                  className={classNames(
-                    "col-lg-6",
-                    "col-md-12",
-                    styles.paddedDiv
-                  )}
-                >
+                <div className={classNames("col-lg-6", "col-md-12")}>
                   {paragraph instanceof Array &&
                     paragraph.map((subParagraph, index) => (
                       <p key={`${index}_${subParagraph}`}>{subParagraph}</p>
@@ -57,26 +46,14 @@ const ItemContent: FC<any> = ({ meta }) => {
             )}
             {image && paragraph && index % 2 === 1 && (
               <>
-                <div
-                  className={classNames(
-                    "col-lg-6",
-                    "col-md-12",
-                    styles.paddedDiv
-                  )}
-                >
+                <div className={classNames("col-lg-6", "col-md-12")}>
                   {paragraph instanceof Array &&
                     paragraph.map((subParagraph, index) => (
                       <p key={`${index}_${subParagraph}`}>{subParagraph}</p>
                     ))}
                   {!(paragraph instanceof Array) && <p>{paragraph}</p>}
                 </div>
-                <div
-                  className={classNames(
-                    "col-lg-6",
-                    "col-md-12",
-                    styles.paddedDiv
-                  )}
-                >
+                <div className={classNames("col-lg-6", "col-md-12")}>
                   {image instanceof Object && !(image instanceof Array) && (
                     <ExhibitSearchItem item={getExhibitItemById(image.id)} />
                   )}
@@ -90,14 +67,14 @@ const ItemContent: FC<any> = ({ meta }) => {
               </>
             )}
             {!image && paragraph && paragraph instanceof Array && (
-              <div className={classNames("col-md-12", styles.paddedDiv)}>
+              <div className={classNames("col-md-12")}>
                 {paragraph.map((subParagraph, index) => (
                   <p key={`${index}_${subParagraph}`}>{subParagraph}</p>
                 ))}
               </div>
             )}
             {!image && paragraph && !(paragraph instanceof Array) && (
-              <div className={classNames("col-md-12", styles.paddedDiv)}>
+              <div className={classNames("col-md-12")}>
                 <p>{paragraph}</p>
               </div>
             )}
@@ -106,23 +83,13 @@ const ItemContent: FC<any> = ({ meta }) => {
               image instanceof Object &&
               !(image instanceof Array) && (
                 <div
-                  className={classNames(
-                    "col-md-12",
-                    styles.centeredContent,
-                    styles.paddedDiv
-                  )}
+                  className={classNames("col-md-12", styles.centeredContent)}
                 >
                   <ExhibitSearchItem item={getExhibitItemById(image.id)} />
                 </div>
               )}
             {image && !paragraph && image instanceof Array && (
-              <div
-                className={classNames(
-                  "col-md-12",
-                  styles.centeredContent,
-                  styles.paddedDiv
-                )}
-              >
+              <div className={classNames("col-md-12", styles.centeredContent)}>
                 <Slider id={id.concat(index)} images={image} />
               </div>
             )}
@@ -131,26 +98,24 @@ const ItemContent: FC<any> = ({ meta }) => {
               !(image instanceof Object) &&
               !(image instanceof Array) && (
                 <div
-                  className={classNames(
-                    "col-md-12",
-                    styles.centeredContent,
-                    styles.paddedDiv
-                  )}
+                  className={classNames("col-md-12", styles.centeredContent)}
                 >
                   <img alt={image} src={image} className="img-fluid" />
                 </div>
               )}
           </>
         ))}
-      </div>
+      </Row>
     );
   };
 
   return (
     <>
-      <div className="padded-div">
-        <h1>{name}</h1>
-      </div>
+      <Row className="pl-3 pr-3">
+        <Col>
+          <h1>{name}</h1>
+        </Col>
+      </Row>
       {renderContent()}
     </>
   );

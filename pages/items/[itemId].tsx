@@ -1,8 +1,5 @@
 import PageNotFound from "@/pages/404";
-import {
-  filterByShowParameter,
-  getExhibitItemById,
-} from "@/utils/exhibitItems";
+import { getExhibitItemById } from "@/utils/exhibitItems";
 import ExhibitItemModel from "@/models/ExhibitItemModel";
 import ItemPageModel from "@/models/ItemPageModel";
 import ItemContent from "@/components/ItemContent";
@@ -17,6 +14,8 @@ export default function ExhibitsPage({
     <>
       <Head>
         <title>{itemMeta.name}</title>
+        <meta name="description" content={itemMeta.name} />
+        <meta name="keywords" content={itemMeta.name} />
       </Head>
       <ItemContent meta={itemMeta} />
     </>

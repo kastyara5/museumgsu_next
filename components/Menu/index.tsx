@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-import { universeImage } from "../../consts/config";
+import { universeImage } from "@/consts/config";
 
 const Menu = () => (
   <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,12 +34,12 @@ const Menu = () => (
           </Link>
           <ul className="dropdown-menu">
             <li>
-              <Link className="nav-item nav-link" href="/rectors">
+              <Link className="nav-item nav-link pl-3 pr-3" href="/rectors">
                 Руководители
               </Link>
             </li>
             <li>
-              <Link className="nav-item nav-link" href="/exhibits/1">
+              <Link className="nav-item nav-link pl-3 pr-3" href="/exhibits/1">
                 Выставочный зал
               </Link>
             </li>

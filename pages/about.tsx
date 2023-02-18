@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Head from "next/head";
+import { defaultDescription } from "@/consts/config";
 
 import logo from "@/static/img/logo.png";
 
@@ -8,6 +9,11 @@ const About = () => (
   <>
     <Head>
       <title>Справка о музее Гомельского Государственного Университета</title>
+      <meta name="description" content={defaultDescription} />
+      <meta
+        name="keywords"
+        content="ГГУ, Гомельский Университет, Университет Скорины, музей Гомель, музей ГГУ, музей Гомельского университета, музей ГГУ Скорины"
+      />
     </Head>
     <div className="row pt-4">
       <div className="col-lg-2 col-md-2">

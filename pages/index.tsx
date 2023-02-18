@@ -1,12 +1,17 @@
 import Head from "next/head";
 
-import { universeImage } from "@/consts/config";
+import { defaultDescription, universeImage } from "@/consts/config";
 
 export default function Home() {
   return (
     <>
       <Head>
         <title>Музей Гомельского Государственного Университета</title>
+        <meta name="description" content={defaultDescription} />
+        <meta
+          name="keywords"
+          content="ГГУ, Гомельский Университет, Университет Скорины, музей Гомель, музей ГГУ, музей Гомельского университета, музей ГГУ Скорины"
+        />
       </Head>
       <div>
         <div

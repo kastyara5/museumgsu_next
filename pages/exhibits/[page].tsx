@@ -4,26 +4,31 @@ import ItemsPage from "@/components/ItemsContent";
 import PageMetaModel from "@/models/PageMetaModel";
 import PageWithPaginationModel from "@/models/PageWithPaginationModel";
 import siteData from "@/static/json/exhibits.json";
-import PageNotFound from "@/pages/404";
 import { getPagesCount } from "@/utils/pagination";
 import { COUNT_EXHIBITS_PER_PAGE } from "@/consts/pagination";
 import { filterByShowParameter, getItemsByPage } from "@/utils/exhibitItems";
 import ExhibitItemModel from "@/models/ExhibitItemModel";
+import { defaultDescription } from "@/consts/config";
 
 export default function ExhibitsPage({
   pageMeta,
 }: {
   pageMeta: PageMetaModel;
 }) {
-  return pageMeta.exhibitItems.length ? (
+  return (
     <>
       <Head>
-        <title>Выставочный зал музея Гомельского Государственного Университета</title>
+        <title>
+          Выставочный зал музея Гомельского Государственного Университета
+        </title>
+        <meta name="description" content={defaultDescription} />
+        <meta
+          name="keywords"
+          content="ГГУ, Гомельский Университет, Университет Скорины, музей Гомель, музей ГГУ, музей Гомельского университета, музей ГГУ Скорины"
+        />
       </Head>
       <ItemsPage meta={pageMeta} searchable />
     </>
-  ) : (
-    <PageNotFound />
   );
 }
 

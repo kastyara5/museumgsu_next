@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from "react";
+import React, { FC, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { useRouter } from "next/router";
 
@@ -7,21 +7,27 @@ import ExhibitSearchItem from "@/components/ExhibitSearchItem";
 import Pagination from "@/components/Pagination";
 import useDebounce from "@/hooks/useDebounce";
 import { PAGE_PATTERN } from "@/consts/pagination";
+import PageNotFound from "@/pages/404";
 
 const ItemsContent: FC<{ meta: PageMetaModel; searchable?: boolean }> = ({
   meta,
   searchable = "",
 }) => {
   const { query, push } = useRouter();
-  const initSearch = useMemo(() => query.search?.toString() || "", []);
-  const [search, setSearch] = useState<string>(initSearch);
+  const [prevSearch, setPrevSearch] = useState<string>(
+    query.search?.toString() || ""
+  );
+  const [search, setSearch] = useState<string>(prevSearch);
 
   useDebounce(
     () => {
-      if (initSearch !== search) push(`/exhibits/1?search=${search}`);
+      if (prevSearch !== search) {
+        setPrevSearch(search);
+        push(`/exhibits/1?search=${search}`);
+      }
     },
     [search],
-    1000
+    2000
   );
 
   const handleSearch = ({ target }: any) => {
@@ -69,11 +75,20 @@ const ItemsContent: FC<{ meta: PageMetaModel; searchable?: boolean }> = ({
           </Col>
         </Row>
         <Row className="pb-4">
-          {meta.exhibitItems.map((exhibit) => (
-            <Col lg={3} md={12} className="col-lg-3 col-md-12" key={exhibit.id}>
-              <ExhibitSearchItem item={exhibit} />
-            </Col>
-          ))}
+          {meta.exhibitItems.length ? (
+            meta.exhibitItems.map((exhibit) => (
+              <Col
+                lg={3}
+                md={12}
+                className="col-lg-3 col-md-12 pb-3"
+                key={exhibit.id}
+              >
+                <ExhibitSearchItem item={exhibit} />
+              </Col>
+            ))
+          ) : (
+            <PageNotFound />
+          )}
         </Row>
         <Row>
           <Col className="d-flex justify-content-center">
